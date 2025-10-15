@@ -9,29 +9,41 @@ body {
 
 /* ===== КОНТЕЙНЕР СТРАНИЦЫ ===== */
 .page-container {
-    max-width: 1200px; /* Максимальная ширина контента */
-    margin: 0 auto; /* Центрирование контейнера по горизонтали */
-    background: white; /* Белый фон для основного содержимого */
-    min-height: 100vh; /* Минимальная высота равна высоте окна браузера */
-    box-shadow: 0 0 30px rgba(0,0,0,0.1); /* Легкая тень вокруг всего контента */
-}
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    min-height: 100vh;
+    box-shadow: 0 0 30px rgba(0,0,0,0.1);
+    /* Новое: Сеточный макет для семантических областей */
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-areas:
+    "header"
+    "nav"
+    "main"
+    "footer";
+    }
 
 /* ===== ШАПКА ===== */
 .header {
-    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); /* Темный градиентный фон */
-    color: white; /* Белый цвет текста */
-    text-align: center; /* Выравнивание текста по центру */
-    padding: 30px; /* Внутренние отступы со всех сторон */
-    font-size: 28px; /* Размер шрифта */
-    font-weight: 300; /* Легкое начертание шрифта */
-    letter-spacing: 2px; /* Расстояние между буквами */
-}
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    color: white;
+    text-align: center;
+    padding: 30px;
+    font-size: 28px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    /* Новое: Привязка к области сетки */
+    grid-area: header;
+    }
 
 /* ===== НАВИГАЦИЯ ===== */
 .nav {
-    background: #2c3e50; /* Темно-синий фон навигации */
-    padding: 20px 0; /* Вертикальные отступы */
-}
+    background: #2c3e50;
+    padding: 20px 0;
+    /* Новое: Привязка к области сетки */
+    grid-area: nav;
+    }
 
 .nav-list {
     list-style: none; /* Убираем маркеры списка */
@@ -61,12 +73,13 @@ body {
 }
 
 /* ===== ОСНОВНОЙ КОНТЕНТ ===== */
-.content {
-    padding: 40px; /* Внутренние отступы контента */
-    max-width: 900px; /* Максимальная ширина контента */
-    margin: 0 auto; /* Центрирование контента */
-}
-
+main.content {
+    padding: 40px;
+    max-width: 900px;
+    margin: 0 auto;
+    /* Новое: Привязка к области сетки */
+    grid-area: main;
+    }
 /* ===== ГЛАВНАЯ СТРАНИЦА ===== */
 .profile-header {
     text-align: center; /* Выравнивание по центру */
@@ -114,6 +127,12 @@ body {
 }
 
 /* ===== НАВЫКИ ===== */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+    }
 .skills-container {
     display: flex; /* Горизонтальное расположение навыков */
     justify-content: center; /* Выравнивание по центру */
@@ -150,6 +169,12 @@ body {
     margin-bottom: 30px; /* Отступ снизу */
     font-weight: 300; /* Легкое начертание шрифта */
 }
+
+.experience-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    }
 
 .experience-card {
     background: white; /* Белый фон карточки */
@@ -299,4 +324,19 @@ body {
     text-align: center; /* Выравнивание по центру */
     padding: 30px; /* Внутренние отступы */
     margin-top: 50px; /* Отступ сверху */
+}
+@media (max-width: 768px) {
+    .nav-list {
+    flex-direction: column;
+    gap: 10px;
+    main.content {
+    padding: 20px;
+    }
+    }
+    }
+    .skills-grid {
+    grid-template-columns: 1fr;
+    .experience-grid {
+    grid-template-columns: 1fr;
+    }
 }
